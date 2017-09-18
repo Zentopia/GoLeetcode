@@ -29,25 +29,38 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	for {
 
-		if headNode1.Next == nil || headNode2.Next == nil {
+		if (headNode1.Next == nil && headNode2.Next == nil)&& add == 0 {
 			break
 		} else {
-			headNode1 = headNode1.Next
-			headNode2 = headNode2.Next
+
+			if headNode1.Next == nil {
+				headNode1 = &ListNode{0, nil}
+			} else {
+				headNode1 = headNode1.Next
+			}
+
+			if headNode2.Next == nil {
+				headNode2 = &ListNode{0, nil}
+			} else {
+				headNode2 = headNode2.Next
+			}
+
 		}
-
-		sum = headNode1.Val + headNode2.Val + add
-
-		newNode := ListNode{sum%10, nil}
-		if sum >= 10{
-			add = 1
-		} else {
+			sum = headNode1.Val + headNode2.Val + add
 			add = 0
-		}
 
-		tempNode := currentNode
-		currentNode = &newNode
-		tempNode.Next = currentNode
+			newNode := ListNode{sum%10, nil}
+
+			if sum >= 10{
+				add = 1
+			} else {
+				add = 0
+			}
+
+			tempNode := currentNode
+			currentNode = &newNode
+			tempNode.Next = currentNode
+
 	}
 
 	return &headNode
